@@ -1,7 +1,17 @@
 function fetchUserData() {
   fetch("https://randomuser.me/api")
-    .then((response) => response.json)
-    .then((data) => showUser(data.results[0]));
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json;
+    })
+    .then((data) => showUser(data.results[0]))
+    .catch((error) => {
+      document.getElementById(
+        "user"
+      ).innerHTML = `<p class = "text xl text-center text-red-500 mb-5">${error}</p>`;
+    });
 }
 
 function showUser(user) {

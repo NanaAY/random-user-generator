@@ -4,7 +4,7 @@ function fetchUserData() {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      return response.json;
+      return response.json();
     })
     .then((data) => showUser(data.results[0]))
     .catch((error) => {
